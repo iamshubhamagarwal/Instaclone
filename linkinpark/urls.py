@@ -1,4 +1,4 @@
-"""linkinpark URL Configuration
+"""mysite URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -16,8 +16,8 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from django.conf.urls import url
-from linkinpark.views import signup_view
-from linkinpark.views import login_view,feed_view,post_view,like_view,comment_view
+from myapp.views import signup_view
+from myapp.views import login_view,feed_view,post_view,like_view,comment_view
 
 
 urlpatterns = [
