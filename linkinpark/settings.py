@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'linkinpark.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'Myapp',
+        'NAME': 'sys',
         'USER':'root',
         'PASSWORD':'shubhamag',
         'HOST':'127.0.0.1',
