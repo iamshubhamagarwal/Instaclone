@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Feed</title>
+    </head>
+    <body>
+        <form  method="post" action="/post/">
+            {% csrf_token %}
+            <input type="submit" class="button button-default " value="Create Post">
+        </form>
+        {% for post in posts %}
+            <h3>
+                Posted By:{{ post.user.username }}
+            </h3>
+            <p>[{{ post.created_on }}]</p>
+            <img src="{{ post.image_url }}">
+            <br>
+            <br>
+            <span>
+                {{ post.caption }}
+            </span>
+            <br>
+            <br>
+            <div>
+                {{ post.like_count }} likes this
+                <form method="post" action="/like/">
+                    {% csrf_token %}
+                    <input type="hidden" name="post" value="{{ post.id }}">
+                    {% if post.has_liked %}
+                        <input type="submit" class="button button-default" value="Unlike">
+                        <p>You have liked this post</p>
+                    {% else %}
+                        <input type="submit" class="button button-default" value="Like">
+                    {% endif %}
+                </form>
+            </div>
+            <br>
+            <div>
+                <p>Categories:</p>
+                {%  for category in post.categories %}
+                    <span>
+                        {{ category.category_text}}
+                    </span>
+                {% endfor %}
+            </div>
+            <br>
+            <div>
+                <form method="post" action="/comment/">
+                    {% csrf_token %}
+                    <input type="hidden" name="post" value="{{ post.id }}">
+                    <input type="text" name="comment_text" id="comment_text" placeholder="Make a comment.." value="{{ comment_text }}">
+                    {{ comment_text }}
+                    <input type="submit" class="button button-default" value="Comment">
+                </form>
+            </div>
+            <div>
+                {% for comment in post.comments %}
+                    <p><b>{{ comment.user.username }}[{{ comment.created_on }}]:</b>{{ comment.comment_text }}</p>
+                {% endfor %}
+            </div>
+            <br>
+            <br>
+            <br>
+        {% endfor %}
+    </body>
+</html>
